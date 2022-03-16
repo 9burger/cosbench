@@ -13,3 +13,4 @@ Import-Package: com.intel.cosbench.log,
  org.osgi.framework
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Intel
+Automatic-Module-Name: cosbench.tomcat

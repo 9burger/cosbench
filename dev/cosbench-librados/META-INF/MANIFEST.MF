@@ -15,3 +15,4 @@ import-Package: com.intel.cosbench.api.auth,
  com.intel.cosbench.config,
  com.intel.cosbench.config.common,
  com.intel.cosbench.log
+Automatic-Module-Name: cosbench.librados

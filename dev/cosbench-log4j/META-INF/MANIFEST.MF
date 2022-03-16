@@ -6,3 +6,4 @@ Bundle-Version: 0.4.2.0
 Bundle-Vendor: intel
 Fragment-Host: com.springsource.org.apache.log4j;bundle-version="[1.0.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Automatic-Module-Name: cosbench.log4j

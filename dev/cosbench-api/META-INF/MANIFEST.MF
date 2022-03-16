@@ -10,3 +10,4 @@ Import-Package: com.intel.cosbench.config,
 Export-Package: com.intel.cosbench.api.auth,
  com.intel.cosbench.api.storage,
  com.intel.cosbench.api.context
+Automatic-Module-Name: cosbench.api

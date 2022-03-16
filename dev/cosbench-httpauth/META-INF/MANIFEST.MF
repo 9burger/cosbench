@@ -32,3 +32,4 @@ Import-Package: com.intel.cosbench.api.auth,
  org.apache.http.protocol;version="[4.1.4,5.0.0)",
  org.apache.http.util;version="[4.1.4,5.0.0)"
 Require-Bundle: org.apache.httpcomponents.httpclient
+Automatic-Module-Name: cosbench.httpauth

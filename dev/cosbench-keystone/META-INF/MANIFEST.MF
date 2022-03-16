@@ -20,3 +20,4 @@ Import-Package: com.intel.cosbench.api.auth,
  org.codehaus.jackson;version="[1.4.2,2.0.0)",
  org.codehaus.jackson.map;version="[1.4.2,2.0.0)",
  org.codehaus.jackson.map.annotate;version="[1.4.2,2.0.0)"
+Automatic-Module-Name: cosbench.keystone

@@ -13,3 +13,4 @@ Import-Package: org.apache.commons.io;version="[1.4.0,2.0.0)",
  org.osgi.framework,
  org.slf4j.helpers;version="[1.5.6,1.6.0)"
 Export-Package: com.intel.cosbench.log
+Automatic-Module-Name: cosbench.log

@@ -21,3 +21,4 @@ Import-Package: com.intel.cosbench.api.auth,
  org.apache.commons.io.output;version="[1.4.0,2.0.0)",
  org.apache.commons.lang;version="[2.5.0,3.0.0)",
  org.apache.commons.lang.math;version="[2.5.0,3.0.0)"
+Automatic-Module-Name: cosbench.driver

@@ -26,3 +26,4 @@ Bundle-ClassPath: .,
  slf4j-api-1.7.5.jar,
  smart-client-2.0.6.jar,
  vipr-object-transformations-2.0.3.jar
+Automatic-Module-Name: cosbench.ecs
