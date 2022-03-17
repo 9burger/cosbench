@@ -1,6 +1,7 @@
 *.class
 /dist/osgi/plugins/cosbench*
 /dist/osgi/logs.zip
+/release/workspace
 
 # Package Files #
 /0.4.*
