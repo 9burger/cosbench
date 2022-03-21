@@ -6,7 +6,7 @@
     <stringAttribute key="bootstrap" value=""/>
     <stringAttribute key="checked" value="[NONE]"/>
     <booleanAttribute key="clearConfig" value="false"/>
-    <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Driver-import"/>
+    <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Driver"/>
     <booleanAttribute key="default" value="true"/>
     <booleanAttribute key="default_auto_start" value="true"/>
     <intAttribute key="default_start_level" value="8"/>
@@ -15,13 +15,14 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog -console"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true -Declipse.ignoreApp=true -Dosgi.noShutdown=true -Dosgi.startLevel=8 -Dcosbench.tomcat.config=./conf/controller-tomcat-server.xml -Dosgi.configuration.area=conf/.driver/"/>
     <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="/home/users/maxnieberger/repo/cosbench/max-cosbench/release"/>
     <stringAttribute key="pde.version" value="3.3"/>
     <setAttribute key="selected_target_bundles">
+        <setEntry value="com.springsource.freemarker@2:start"/>
         <setEntry value="com.springsource.javax.activation@1:start"/>
         <setEntry value="com.springsource.javax.annotation@1:start"/>
         <setEntry value="com.springsource.javax.ejb@1:start"/>
@@ -48,11 +49,11 @@
         <setEntry value="com.springsource.org.apache.commons.io@2:start"/>
         <setEntry value="com.springsource.org.apache.commons.jxpath@2:start"/>
         <setEntry value="com.springsource.org.apache.commons.lang@2:start"/>
-        <setEntry value="com.springsource.org.apache.coyote@default:false"/>
+        <setEntry value="com.springsource.org.apache.coyote@default:default"/>
         <setEntry value="com.springsource.org.apache.juli.extras@2:start"/>
         <setEntry value="com.springsource.org.apache.log4j@2:start"/>
         <setEntry value="com.springsource.org.apache.regexp@2:start"/>
-        <setEntry value="com.springsource.org.apache.xerces@default:false"/>
+        <setEntry value="com.springsource.org.apache.xerces@default:default"/>
         <setEntry value="com.springsource.org.apache.xml.resolver@2:start"/>
         <setEntry value="com.springsource.org.apache.xmlcommons@2:start"/>
         <setEntry value="com.springsource.org.castor@2:start"/>
@@ -61,16 +62,10 @@
         <setEntry value="com.springsource.org.jdom@2:start"/>
         <setEntry value="com.springsource.org.joda.time@2:start"/>
         <setEntry value="com.springsource.slf4j.api@2:start"/>
-        <setEntry value="com.springsource.slf4j.log4j@default:false"/>
+        <setEntry value="com.springsource.slf4j.log4j@default:default"/>
         <setEntry value="com.springsource.slf4j.org.apache.commons.logging@2:start"/>
-        <setEntry value="org.apache.commons.codec@default:default"/>
-        <setEntry value="org.apache.commons.logging@default:default"/>
-        <setEntry value="org.apache.httpcomponents.httpclient*4.1.3@2:start"/>
-        <setEntry value="org.apache.httpcomponents.httpclient*4.5.13.v20210128-2225@2:start"/>
-        <setEntry value="org.apache.httpcomponents.httpcore*4.1.4@2:start"/>
-        <setEntry value="org.apache.httpcomponents.httpcore*4.4.14.v20210128-2225@2:start"/>
-        <setEntry value="org.eclipse.osgi*3.7.0.v20110613@-1:true"/>
-        <setEntry value="org.freemarker@default:default"/>
+        <setEntry value="org.apache.httpcomponents.httpclient@2:start"/>
+        <setEntry value="org.apache.httpcomponents.httpcore@2:start"/>
         <setEntry value="org.springframework.aop@3:start"/>
         <setEntry value="org.springframework.asm@3:start"/>
         <setEntry value="org.springframework.beans@3:start"/>
@@ -78,24 +73,22 @@
         <setEntry value="org.springframework.context@3:start"/>
         <setEntry value="org.springframework.core@3:start"/>
         <setEntry value="org.springframework.expression@3:start"/>
-        <setEntry value="org.springframework.osgi.core@default:default"/>
-        <setEntry value="org.springframework.osgi.extender@default:default"/>
-        <setEntry value="org.springframework.osgi.io@default:default"/>
-        <setEntry value="org.springframework.osgi.web.extender@default:default"/>
-        <setEntry value="org.springframework.osgi.web@default:default"/>
         <setEntry value="org.springframework.web.servlet@3:start"/>
         <setEntry value="org.springframework.web@3:start"/>
+        <setEntry value="spring@4:start"/>
+        <setEntry value="spring@4:start"/>
+        <setEntry value="spring@4:start"/>
+        <setEntry value="spring@5:start"/>
+        <setEntry value="spring@5:start"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
         <setEntry value="cosbench-ampli@7:start"/>
         <setEntry value="cosbench-api@7:start"/>
-        <setEntry value="cosbench-castor@default:false"/>
+        <setEntry value="cosbench-castor@default:default"/>
         <setEntry value="cosbench-cdmi-base@7:start"/>
         <setEntry value="cosbench-cdmi-swift@7:start"/>
         <setEntry value="cosbench-cdmi-util@6:start"/>
         <setEntry value="cosbench-config@6:start"/>
-        <setEntry value="cosbench-controller-web@default:default"/>
-        <setEntry value="cosbench-controller@default:default"/>
         <setEntry value="cosbench-core-web@8:start"/>
         <setEntry value="cosbench-core@8:start"/>
         <setEntry value="cosbench-driver-web@8:start"/>
@@ -106,7 +99,7 @@
         <setEntry value="cosbench-httpauth@7:start"/>
         <setEntry value="cosbench-keystone@7:start"/>
         <setEntry value="cosbench-librados@7:start"/>
-        <setEntry value="cosbench-log4j@default:false"/>
+        <setEntry value="cosbench-log4j@default:default"/>
         <setEntry value="cosbench-log@6:start"/>
         <setEntry value="cosbench-mock@7:start"/>
         <setEntry value="cosbench-openio@7:start"/>
