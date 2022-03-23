@@ -1,6 +1,6 @@
-package com.intel.cosbench.api.S3Stor;
+package com.intel.cosbench.api.S3ZStor;
 
-import static com.intel.cosbench.client.S3Stor.S3Constants.*;
+import static com.intel.cosbench.client.S3ZStor.S3Constants.*;
 
 import java.io.*;
 

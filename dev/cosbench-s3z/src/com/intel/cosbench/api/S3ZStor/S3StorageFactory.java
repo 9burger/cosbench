@@ -1,4 +1,4 @@
-package com.intel.cosbench.api.S3Stor;
+package com.intel.cosbench.api.S3ZStor;
 
 import com.intel.cosbench.api.storage.*;
 

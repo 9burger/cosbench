@@ -1,4 +1,4 @@
-package com.intel.cosbench.client.S3Stor;
+package com.intel.cosbench.client.S3ZStor;
 
 public interface S3Constants {
     // --------------------------------------------------------------------------

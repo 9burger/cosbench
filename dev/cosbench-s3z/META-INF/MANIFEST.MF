@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: S3 Storage Client Bundle
-Bundle-SymbolicName: cosbench-s3
+Bundle-Name: S3Z Storage Client Bundle
+Bundle-SymbolicName: cosbench-s3z
 Bundle-Version: 0.4.2.0
 Bundle-Vendor: intel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -33,5 +33,5 @@ Import-Package: com.intel.cosbench.api.auth,
  com.intel.cosbench.client.http,
  com.intel.cosbench.config,
  com.intel.cosbench.log
-Automatic-Module-Name: cosbench.s3
+Automatic-Module-Name: cosbench.s3z
 
