@@ -17,7 +17,6 @@ limitations under the License.
 
 package com.intel.cosbench.controller.service;
 
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 

@@ -20,8 +20,6 @@ package com.intel.cosbench.config;
 import java.util.*;
 
 import com.intel.cosbench.config.common.ConfigUtils;
-import com.intel.cosbench.log.LogFactory;
-import com.intel.cosbench.log.Logger;
 
 /**
  * The model class mapping to "workflow" in configuration xml with following form:

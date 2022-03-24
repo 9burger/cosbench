@@ -23,9 +23,6 @@ import com.intel.cosbench.bench.ErrorStatistics;
 
 import java.util.*;
 
-import javax.naming.AuthenticationException;
-
-import com.intel.cosbench.api.auth.AuthBadException;
 import com.intel.cosbench.api.auth.AuthException;
 import com.intel.cosbench.api.context.AuthContext;
 import com.intel.cosbench.api.storage.StorageAPI;

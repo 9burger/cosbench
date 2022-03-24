@@ -22,8 +22,6 @@ import static com.intel.cosbench.model.MissionState.FAILED;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-
 import com.intel.cosbench.bench.Report;
 import com.intel.cosbench.model.MissionInfo;
 import com.intel.cosbench.model.TaskState;

@@ -17,7 +17,6 @@ limitations under the License.
 
 package com.intel.cosbench.client.http;
 
-import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
@@ -26,10 +25,6 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpResponseInterceptor;
-import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -47,7 +42,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-import org.apache.http.protocol.HttpContext;
 
 /**
  * This class encapsulates basic HTTP client related functions which are

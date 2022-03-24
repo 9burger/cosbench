@@ -47,7 +47,6 @@ import com.intel.cosbench.api.auth.AuthInterruptedException;
 import com.intel.cosbench.api.auth.AuthTimeoutException;
 import com.intel.cosbench.api.auth.NoneAuth;
 import com.intel.cosbench.api.context.AuthContext;
-import com.intel.cosbench.api.context.DefaultAuthContext;
 import com.intel.cosbench.client.http.HttpClientUtil;
 import com.intel.cosbench.config.Config;
 import com.intel.cosbench.log.Logger;
