@@ -1,6 +1,6 @@
 package com.intel.cosbench.client.S3ZStor;
 
-public interface S3Constants {
+public interface S3ZConstants {
     // --------------------------------------------------------------------------
     // CONNECTION
     // --------------------------------------------------------------------------

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: S3Z Storage Client Bundle
 Bundle-SymbolicName: cosbench-s3z
 Bundle-Version: 0.4.2.0
-Bundle-Vendor: intel
+Bundle-Vendor: ultrata
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .,
  aspectjrt.jar,
@@ -30,7 +30,10 @@ Bundle-ClassPath: .,
  aws-sdk-java-aws-core-2.17.155-SNAPSHOT.jar,
  aws-sdk-java-utils-2.17.155-SNAPSHOT.jar,
  aws-sdk-java-auth-2.17.155-SNAPSHOT.jar,
- aws-sdk-java-apache-client-2.17.155-SNAPSHOT.jar
+ aws-sdk-java-apache-client-2.17.155-SNAPSHOT.jar,
+ aws-java-sdk-core-1.10.76.jar,
+ aws-java-sdk-kms-1.10.76.jar,
+ aws-java-sdk-s3-1.10.76.jar
 Import-Package: com.intel.cosbench.api.auth,
  com.intel.cosbench.api.context,
  com.intel.cosbench.api.storage,

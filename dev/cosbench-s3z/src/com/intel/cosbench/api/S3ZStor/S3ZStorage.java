@@ -1,11 +1,20 @@
 package com.intel.cosbench.api.S3ZStor;
 
-import static com.intel.cosbench.client.S3ZStor.S3Constants.*;
+import static com.intel.cosbench.client.S3ZStor.S3ZConstants.*;
 
 import java.io.*;
 
 import org.apache.http.HttpStatus;
 
+// Old Imports
+//import com.amazonaws.*;
+//import com.amazonaws.Protocol;
+//import com.amazonaws.auth.*;
+//import com.amazonaws.services.s3.*;
+//import com.amazonaws.services.s3.model.*;
+//import com.amazonaws.services.s3.model.S3Object;
+
+// New AWS SDK
 import software.amazon.awssdk.*;
 import software.amazon.awssdk.auth.*;
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
@@ -26,6 +35,7 @@ public class S3ZStorage extends NoneStorage {
     private String secretKey;
     private String endpoint;
     
+//    private AmazonS3 client;
     private S3Client client;
 
     @Override
@@ -55,24 +65,24 @@ public class S3ZStorage extends NoneStorage {
         logger.debug("using storage config: {}", parms);
         
 //      Old method commented
-//        ClientConfiguration clientConf = new ClientConfiguration();
-        ClientOverrideConfiguration.Builder overrideConfig = ClientOverrideConfiguration.builder();
-        ApacheHttpClient.Builder httpClientBuilder = ApacheHttpClient.builder();
-//        clientConf.setConnectionTimeout(timeout);
-        httpClientBuilder.connectionTimeout(timeout);
-//        clientConf.setSocketTimeout(timeout);
-        httpClientBuilder.socketTimeout(timeout);
-//        clientConf.withUseExpectContinue(false);
-        httpClientBuilder.expectContinueEnabled(false);
-//        clientConf.withSignerOverride("S3SignerType");
-//        clientConf.setProtocol(Protocol.HTTP);
+        ClientConfiguration clientConf = new ClientConfiguration();
+//        ClientOverrideConfiguration.Builder overrideConfig = ClientOverrideConfiguration.builder();
+//        ApacheHttpClient.Builder httpClientBuilder = ApacheHttpClient.builder();
+        clientConf.setConnectionTimeout(timeout);
+//        httpClientBuilder.connectionTimeout(timeout);
+        clientConf.setSocketTimeout(timeout);
+//        httpClientBuilder.socketTimeout(timeout);
+        clientConf.withUseExpectContinue(false);
+//        httpClientBuilder.expectContinueEnabled(false);
+        clientConf.withSignerOverride("S3SignerType");
+        clientConf.setProtocol(Protocol.HTTP);
 		if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
 			clientConf.setProxyHost(proxyHost);
 			clientConf.setProxyPort(Integer.parseInt(proxyPort));
 		}
         
         AWSCredentials myCredentials = new BasicAWSCredentials(accessKey, secretKey);
-        client = new S3Client(myCredentials, clientConf);
+        client = new AmazonS3Client(myCredentials, clientConf);
         client.setEndpoint(endpoint);
         client.setS3ClientOptions(new S3ClientOptions().withPathStyleAccess(pathStyleAccess));
         
@@ -147,7 +157,7 @@ public class S3ZStorage extends NoneStorage {
         		client.deleteBucket(container);
         	}
         } catch(S3Exception awse) {
-        	if(awse.getStatusCode() != HttpStatus.SC_NOT_FOUND) {
+        	if(awse.statusCode() != HttpStatus.SC_NOT_FOUND) {
         		throw new StorageException(awse);
         	}
         } catch (Exception e) {
@@ -161,7 +171,7 @@ public class S3ZStorage extends NoneStorage {
         try {
             client.deleteObject(container, object);
         } catch(S3Exception awse) {
-        	if(awse.getStatusCode() != HttpStatus.SC_NOT_FOUND) {
+        	if(awse.statusCode() != HttpStatus.SC_NOT_FOUND) {
         		throw new StorageException(awse);
         	}
         } catch (Exception e) {
