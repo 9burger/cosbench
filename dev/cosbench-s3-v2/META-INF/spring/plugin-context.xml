@@ -8,7 +8,7 @@
          http://www.springframework.org/schema/osgi
          http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-	<bean name="storageFactory" class="com.intel.cosbench.api.S3Stor.S3StorageFactory" />
+	<bean name="storageFactory" class="com.intel.cosbench.api.S3V2Stor.S3V2StorageFactory" />
 
 	<osgi:service ref="storageFactory" context-class-loader="service-provider"
 		interface="com.intel.cosbench.api.storage.StorageAPIFactory">

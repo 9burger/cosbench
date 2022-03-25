@@ -1,8 +1,8 @@
-package com.intel.cosbench.api.S3ZStor;
+package com.intel.cosbench.api.S3V2Stor;
 
 import com.intel.cosbench.api.storage.*;
 
-public class S3ZStorageFactory implements StorageAPIFactory {
+public class S3V2StorageFactory implements StorageAPIFactory {
 
     @Override
     public String getStorageName() {
@@ -11,7 +11,7 @@ public class S3ZStorageFactory implements StorageAPIFactory {
 
     @Override
     public StorageAPI getStorageAPI() {
-        return new S3ZStorage();
+        return new S3V2Storage();
     }
 
 }

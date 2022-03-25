@@ -1,6 +1,6 @@
-package com.intel.cosbench.api.S3ZStor;
+package com.intel.cosbench.api.S3V2Stor;
 
-import static com.intel.cosbench.client.S3ZStor.S3ZConstants.*;
+import static com.intel.cosbench.client.S3V2Stor.S3V2Constants.*;
 
 import java.io.*;
 import java.net.URI;
@@ -29,7 +29,7 @@ import com.intel.cosbench.api.context.*;
 import com.intel.cosbench.config.Config;
 import com.intel.cosbench.log.Logger;
 
-public class S3ZStorage extends NoneStorage {
+public class S3V2Storage extends NoneStorage {
 	private int timeout;
 	private Duration timeoutDuration;
 	

@@ -96,9 +96,9 @@ public class S3ZStorage extends NoneStorage {
         if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
         	
             ProxyConfiguration.Builder proxyConfig = ProxyConfiguration.builder();
-        	int portNum = Integer.parseInt(proxyPort);
-        	
         	try {
+            	int portNum = Integer.parseInt(proxyPort);
+            	
         		URI proxyEndpointURI = new URI(null,null,proxyHost,portNum,null,null,null);
         		
         		proxyConfig.endpoint(proxyEndpointURI);

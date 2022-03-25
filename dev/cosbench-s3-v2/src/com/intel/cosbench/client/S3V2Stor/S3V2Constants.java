@@ -1,6 +1,6 @@
-package com.intel.cosbench.client.S3ZStor;
+package com.intel.cosbench.client.S3V2Stor;
 
-public interface S3ZConstants {
+public interface S3V2Constants {
     // --------------------------------------------------------------------------
     // CONNECTION
     // --------------------------------------------------------------------------
