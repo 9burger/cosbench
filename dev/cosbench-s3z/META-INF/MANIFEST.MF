@@ -33,7 +33,8 @@ Bundle-ClassPath: .,
  aws-sdk-java-apache-client-2.17.155-SNAPSHOT.jar,
  aws-java-sdk-core-1.10.76.jar,
  aws-java-sdk-kms-1.10.76.jar,
- aws-java-sdk-s3-1.10.76.jar
+ aws-java-sdk-s3-1.10.76.jar,
+ aws-sdk-java-http-client-spi-2.17.155-SNAPSHOT.jar
 Import-Package: com.intel.cosbench.api.auth,
  com.intel.cosbench.api.context,
  com.intel.cosbench.api.storage,
