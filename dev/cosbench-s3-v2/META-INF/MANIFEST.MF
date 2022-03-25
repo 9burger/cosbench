@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: S3Z Storage Client Bundle
-Bundle-SymbolicName: cosbench-s3z
+Bundle-Name: S3 Storage Client Bundle v2
+Bundle-SymbolicName: cosbench-s3-v2
 Bundle-Version: 0.4.2.0
 Bundle-Vendor: ultrata
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
