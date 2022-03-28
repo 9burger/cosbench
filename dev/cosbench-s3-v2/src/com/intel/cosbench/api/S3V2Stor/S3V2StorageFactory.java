@@ -6,7 +6,7 @@ public class S3V2StorageFactory implements StorageAPIFactory {
 
     @Override
     public String getStorageName() {
-        return "s3z";
+        return "s3v2";
     }
 
     @Override

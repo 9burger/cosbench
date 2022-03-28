@@ -93,22 +93,22 @@ public class S3V2Storage extends NoneStorage {
 //        		.advancedOption(SdkAdvancedClientOption.SIGNER);//"S3SignerType"
         // protocol is set indirectly, by setting an http endpoint on the client builder
         
-        if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
-        	
-            ProxyConfiguration.Builder proxyConfig = ProxyConfiguration.builder();
-        	int portNum = Integer.parseInt(proxyPort);
-        	
-        	try {
-        		URI proxyEndpointURI = new URI(null,null,proxyHost,portNum,null,null,null);
-        		
-        		proxyConfig.endpoint(proxyEndpointURI);
-        		httpClientBuilder.proxyConfiguration(proxyConfig.build());
-        		
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//        if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
+//        	
+//            ProxyConfiguration.Builder proxyConfig = ProxyConfiguration.builder();
+//        	int portNum = Integer.parseInt(proxyPort);
+//        	
+//        	try {
+//        		URI proxyEndpointURI = new URI(null,null,proxyHost,portNum,null,null,null);
+//        		
+//        		proxyConfig.endpoint(proxyEndpointURI);
+//        		httpClientBuilder.proxyConfiguration(proxyConfig.build());
+//        		
+//			} catch (URISyntaxException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
         
         
 		// Old client creation
