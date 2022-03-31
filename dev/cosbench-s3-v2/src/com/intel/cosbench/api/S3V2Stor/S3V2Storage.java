@@ -21,6 +21,7 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.http.apache.*;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.*;
 import software.amazon.awssdk.services.s3.model.*;
 
@@ -132,6 +133,7 @@ public class S3V2Storage extends NoneStorage {
 
         logger.trace("Create s3 client builder");
         S3ClientBuilder clientBuilder = S3Client.builder()
+        		.region(Region.AWS_GLOBAL)
         		.credentialsProvider(StaticCredentialsProvider.create(myCredentials))
         		.httpClientBuilder(httpClientBuilder)
         		.serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(pathStyleAccess).build());
