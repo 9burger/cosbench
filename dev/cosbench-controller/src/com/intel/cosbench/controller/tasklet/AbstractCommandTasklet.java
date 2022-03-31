@@ -69,10 +69,12 @@ abstract class AbstractCommandTasklet<T extends Response> extends
     protected void issueCommand(String command, String content) {
         T response = null;
         String body = issueHttpRequest(command, content);
+        LOGGER.trace("Request dump: {}", body);
         try {
             response = context.getMapper().readValue(body, clazz);
         } catch (Exception e) {
             LOGGER.error("cannot parse response body", e);
+            LOGGER.trace("Context dump: {}", context);
             throw new TaskletException(); // mark termination
         }
         if (!response.isSucc()) {

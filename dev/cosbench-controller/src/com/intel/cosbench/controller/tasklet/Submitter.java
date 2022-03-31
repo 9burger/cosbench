@@ -41,6 +41,7 @@ class Submitter extends AbstractCommandTasklet<SubmitResponse> {
     public void execute() {
         MissionWriter writer = CastorConfigTools.getMissionWriter();
         Mission mission = createMission();
+        LOGGER.debug("mission writer: {}", writer.toXmlString(mission));
         issueCommand("submit", writer.toXmlString(mission));
         context.setState(SUBMITTED);
     }
