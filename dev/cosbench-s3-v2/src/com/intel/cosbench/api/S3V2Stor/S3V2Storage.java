@@ -30,8 +30,8 @@ import com.intel.cosbench.config.Config;
 import com.intel.cosbench.log.Logger;
 
 public class S3V2Storage extends NoneStorage {
+	// How long to wait (in milliseconds) when establishing a connection
 	private int timeout;
-	private Duration timeoutDuration;
 	
     private String accessKey;
     private String secretKey;
@@ -43,10 +43,12 @@ public class S3V2Storage extends NoneStorage {
     @Override
     public void init(Config config, Logger logger) {
     	super.init(config, logger);
+    	logger.trace("Begin s3v2 init");
     	
     	timeout = config.getInt(CONN_TIMEOUT_KEY, CONN_TIMEOUT_DEFAULT);
+    	Duration timeoutDuration = Duration.ofMillis(timeout);
 
-    	parms.put(CONN_TIMEOUT_KEY, timeout);
+    	parms.put(CONN_TIMEOUT_KEY, timeoutDuration);
     	
     	endpoint = config.get(ENDPOINT_KEY, ENDPOINT_DEFAULT);
         accessKey = config.get(AUTH_USERNAME_KEY, AUTH_USERNAME_DEFAULT);
@@ -67,57 +69,68 @@ public class S3V2Storage extends NoneStorage {
         logger.debug("using storage config: {}", parms);
         
         
-        // Old configuration method
-//        ClientConfiguration clientConf = new ClientConfiguration();
+        // Old configuration method 
+/*
+        ClientConfiguration clientConf = new ClientConfiguration();
         
-//        clientConf.setConnectionTimeout(timeout);
-//        clientConf.setSocketTimeout(timeout);
-//        clientConf.withUseExpectContinue(false);
+        clientConf.setConnectionTimeout(timeout);
+        clientConf.setSocketTimeout(timeout);
+        clientConf.withUseExpectContinue(false);
         
-//        clientConf.withSignerOverride("S3SignerType");
-//        clientConf.setProtocol(Protocol.HTTP);
+        clientConf.withSignerOverride("S3SignerType");
+        clientConf.setProtocol(Protocol.HTTP);
         
-//		if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
-//			clientConf.setProxyHost(proxyHost);
-//			clientConf.setProxyPort(Integer.parseInt(proxyPort));
-//		}
+		if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
+			clientConf.setProxyHost(proxyHost);
+			clientConf.setProxyPort(Integer.parseInt(proxyPort));
+		} 
+//*/
 
         // New Configuration
-        ApacheHttpClient.Builder httpClientBuilder = ApacheHttpClient.builder()
-        		.connectionTimeout(timeoutDuration)
-        		.socketTimeout(timeoutDuration)
-        		.expectContinueEnabled(false);
+    	logger.trace("Create HTTP client builder");
+        ApacheHttpClient.Builder httpClientBuilder = ApacheHttpClient.builder();
+    	logger.trace("HTTP client set connection timeout");
+		httpClientBuilder.connectionTimeout(timeoutDuration);
+    	logger.trace("HTTP client set socket timeout");
+		httpClientBuilder.socketTimeout(timeoutDuration);
+    	logger.trace("HTTP client set expect continue enabled to false");
+		httpClientBuilder.expectContinueEnabled(false);
         
+/*
         // Unable to find v2 equivalent of S3SignerType, assume default is sufficient
-//        ClientOverrideConfiguration.Builder overrideConfig = ClientOverrideConfiguration.builder()
-//        		.advancedOption(SdkAdvancedClientOption.SIGNER);//"S3SignerType"
+        ClientOverrideConfiguration.Builder overrideConfig = ClientOverrideConfiguration.builder()
+        		.advancedOption(SdkAdvancedClientOption.SIGNER);//"S3SignerType"
         // protocol is set indirectly, by setting an http endpoint on the client builder
         
-//        if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
-//        	
-//            ProxyConfiguration.Builder proxyConfig = ProxyConfiguration.builder();
-//        	int portNum = Integer.parseInt(proxyPort);
-//        	
-//        	try {
-//        		URI proxyEndpointURI = new URI(null,null,proxyHost,portNum,null,null,null);
-//        		
-//        		proxyConfig.endpoint(proxyEndpointURI);
-//        		httpClientBuilder.proxyConfiguration(proxyConfig.build());
-//        		
-//			} catch (URISyntaxException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+        if((!proxyHost.equals(""))&&(!proxyPort.equals(""))){
+        	
+            ProxyConfiguration.Builder proxyConfig = ProxyConfiguration.builder();
+        	int portNum = Integer.parseInt(proxyPort);
+        	
+        	try {
+        		URI proxyEndpointURI = new URI(null,null,proxyHost,portNum,null,null,null);
+        		
+        		proxyConfig.endpoint(proxyEndpointURI);
+        		httpClientBuilder.proxyConfiguration(proxyConfig.build());
+        		
+			} catch (URISyntaxException e) {
+				// Auto-generated catch block
+				e.printStackTrace();
+			}
+		} 
         
         
 		// Old client creation
-//        AWSCredentials myCredentials = new BasicAWSCredentials(accessKey, secretKey);
-//        client = new AmazonS3Client(myCredentials, clientConf);
-//        client.setEndpoint(endpoint);
-//        client.setS3ClientOptions(new S3ClientOptions().withPathStyleAccess(pathStyleAccess));
+        AWSCredentials myCredentials = new BasicAWSCredentials(accessKey, secretKey);
+        client = new AmazonS3Client(myCredentials, clientConf);
+        client.setEndpoint(endpoint);
+        client.setS3ClientOptions(new S3ClientOptions().withPathStyleAccess(pathStyleAccess));
+//*/
 
+    	logger.trace("Create basic AWS credentials");
         AwsBasicCredentials myCredentials = AwsBasicCredentials.create(accessKey, secretKey);
+
+        logger.trace("Create s3 client builder");
         S3ClientBuilder clientBuilder = S3Client.builder()
         		.credentialsProvider(StaticCredentialsProvider.create(myCredentials))
         		.httpClientBuilder(httpClientBuilder)
@@ -126,10 +139,11 @@ public class S3V2Storage extends NoneStorage {
 			URI endpointURI = new URI(endpoint);
 			clientBuilder.endpointOverride(endpointURI);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+	    	logger.error("Unable to parse endpoint URI: {}", endpoint);
 			e.printStackTrace();
 		}
 		
+    	logger.trace("Build client");
         client = clientBuilder.build();
 		
         logger.debug("S3 client V2 has been initialized");
