@@ -56,7 +56,9 @@ Bundle-ClassPath: .,
  aws-sdk-2/aws-sdk-java-metrics-spi-2.17.155-SNAPSHOT.jar,
  aws-sdk-2/original-aws-sdk-java-third-party-jackson-core-2.17.155-SNAPSHOT.jar,
  aws-sdk-2/original-aws-sdk-java-third-party-jackson-dataformat-cbor-2.17.155-SNAPSHOT.jar,
- org.reactivestreams.reactive-streams_1.0.3.jar
+ org.reactivestreams.reactive-streams_1.0.3.jar,
+ aws-sdk-2/aws-sdk-java-third-party-jackson-core-2.17.155-SNAPSHOT.jar,
+ aws-sdk-2/aws-sdk-java-third-party-jackson-dataformat-cbor-2.17.155-SNAPSHOT.jar
 Import-Package: com.intel.cosbench.api.auth,
  com.intel.cosbench.api.context,
  com.intel.cosbench.api.storage,
