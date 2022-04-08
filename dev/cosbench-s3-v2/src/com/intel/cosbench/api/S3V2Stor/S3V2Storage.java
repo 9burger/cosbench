@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;
+import java.util.Arrays;
 
 import org.apache.http.HttpStatus;
 
@@ -19,13 +20,17 @@ import org.apache.http.HttpStatus;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.core.SdkField;
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.http.apache.*;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.*;
 import software.amazon.awssdk.services.s3.model.*;
 
 import com.intel.cosbench.api.storage.*;
+import com.amazonaws.util.IOUtils;
 import com.intel.cosbench.api.context.*;
 import com.intel.cosbench.config.Config;
 import com.intel.cosbench.log.Logger;
@@ -89,13 +94,10 @@ public class S3V2Storage extends NoneStorage {
 
         // New Configuration
     	logger.trace("Create HTTP client builder");
-        ApacheHttpClient.Builder httpClientBuilder = ApacheHttpClient.builder();
-    	logger.trace("HTTP client set connection timeout");
-		httpClientBuilder.connectionTimeout(timeoutDuration);
-    	logger.trace("HTTP client set socket timeout");
-		httpClientBuilder.socketTimeout(timeoutDuration);
-    	logger.trace("HTTP client set expect continue enabled to false");
-		httpClientBuilder.expectContinueEnabled(false);
+        ApacheHttpClient.Builder httpClientBuilder = ApacheHttpClient.builder()
+        		.connectionTimeout(timeoutDuration)
+        		.socketTimeout(timeoutDuration)
+        		.expectContinueEnabled(false);
         
 /*
         // Unable to find v2 equivalent of S3SignerType, assume default is sufficient
@@ -130,13 +132,18 @@ public class S3V2Storage extends NoneStorage {
 
     	logger.trace("Create basic AWS credentials");
         AwsBasicCredentials myCredentials = AwsBasicCredentials.create(accessKey, secretKey);
+        
+        S3Configuration s3config = S3Configuration.builder()
+				.pathStyleAccessEnabled(pathStyleAccess)
+				.checksumValidationEnabled(false) //TODO: read from configuration
+				.build();
 
         logger.trace("Create s3 client builder");
         S3ClientBuilder clientBuilder = S3Client.builder()
         		.region(Region.AWS_GLOBAL)
         		.credentialsProvider(StaticCredentialsProvider.create(myCredentials))
         		.httpClientBuilder(httpClientBuilder)
-        		.serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(pathStyleAccess).build());
+        		.serviceConfiguration(s3config);
 		try {
 			URI endpointURI = new URI(endpoint);
 			clientBuilder.endpointOverride(endpointURI);
@@ -187,17 +194,43 @@ public class S3V2Storage extends NoneStorage {
 	@Override
     public InputStream getObject(String container, String object, Config config) {
         super.getObject(container, object, config);
+//    	PipedOutputStream response = new PipedOutputStream();
+//        PipedInputStream stream;// = new PipedInputStream(response);
         InputStream stream;
         try {
         	// Old method
 //            S3Object s3Obj = client.getObject(container, object);
 //            stream = s3Obj.getObjectContent();
+
+//        	stream = new PipedInputStream(response);
+//        	client.getObject(GetObjectRequest.builder()
+//            stream = client.getObjectAsBytes(GetObjectRequest.builder()
+//        			.bucket(container)
+//        			.key(object)
+//        			.build())
+//            		.asInputStream();//, 
+//        			ResponseTransformer.toOutputStream(response));
+//        			ResponseTransformer.toInputStream());
+        	HeadObjectResponse objectHeader = client.headObject(HeadObjectRequest.builder()
+        			.bucket(container)
+        			.key(object)
+        			.build());
+        	logger.trace(objectHeader.toString());
         	
-        	stream = client.getObject(GetObjectRequest.builder().bucket(container).key(object).build());
+        	GetObjectRequest objectRequest = GetObjectRequest.builder()
+        			.bucket(container)
+        			.key(object)
+        			.build();
+        	
+        	ResponseInputStream<GetObjectResponse> response = client.getObject(objectRequest);
+        	logger.debug("Object: " + response.toString());
+        	stream = response;
             
         } catch (Exception e) {
             throw new StorageException(e);
         }
+        
+        logger.debug("Object retrieved");
         return stream;
     }
 
@@ -240,11 +273,39 @@ public class S3V2Storage extends NoneStorage {
 //    		
 //        	client.putObject(container, object, data, metadata);
         	
-        	client.putObject(PutObjectRequest.builder()
+        	logger.trace("object info: ");
+        	logger.trace("  container: {}  object: {}", container, object);
+        	logger.trace("  length: {}  config: {}",length, config);
+//        	logger.trace("  data: {}", data);
+        	
+//        	logger.debug("Length compare: {}, {}", length, data.available());
+        	
+//        	byte[] dataBytes = new byte[length];
+//        	data.reset();
+//        	data.mark((int) length);
+        	
+        	// creating request directly from stream leads to read after EOF exceptions
+//        	RequestBody request = RequestBody.fromInputStream(data, length);
+        	
+        	// convert input stream to byte array and make request from that
+        	RequestBody request = RequestBody.fromBytes(IOUtils.toByteArray(data));
+
+        	PutObjectResponse response = client.putObject(PutObjectRequest.builder()
                     .bucket(container)
                     .key(object)
+                    .contentLength(length)
+                    .contentType("application/octet-stream")
                     .build(),
-                    RequestBody.fromInputStream(data, length));
+//                    RequestBody.fromString(container + object));
+//            		RequestBody.fromInputStream(data, length/8));
+                    request);
+        	
+        	logger.debug("Object created: " + response.toString());
+//        	logger.trace(Arrays.toString(response.sdkFields().toArray()));
+//        	for (SdkField field:response.sdkFields()) {
+////        		logger.trace("locaton: {}  member: {}", field.locationName(), field.memberName());
+//        		logger.trace("name: {}  value: {}", field.memberName(), field.getValueOrDefault(response));
+//        	}
         	
         } catch (Exception e) {
             throw new StorageException(e);
